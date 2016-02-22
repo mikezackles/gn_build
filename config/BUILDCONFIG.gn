@@ -1,0 +1,49 @@
+declare_args() {
+  is_debug = true
+  compiler = "clang"
+}
+
+is_clang = false
+is_gcc = false
+if (compiler == "clang") {
+  is_clang = true
+} else if (compiler == "gcc") {
+  is_gcc = true
+} else {
+  assert(false, "Unsupported compiler")
+}
+
+shared_configs = [
+  "//build/flags:standards",
+  "//build/flags:warnings",
+]
+
+# Optimizations and debug checking.
+if (is_debug) {
+  shared_configs += [
+    "//build/flags:no_optimize",
+    "//build/flags:symbols",
+    "//build/flags:debug",
+  ]
+} else {
+  shared_configs += [
+    "//build/flags:optimize",
+    "//build/flags:no_symbols",
+    "//build/flags:whole_program_optimization",
+    "//build/flags:no_debug",
+  ]
+}
+
+set_defaults("executable") {
+  configs = shared_configs
+}
+
+set_defaults("static_library") {
+  configs = shared_configs
+}
+
+set_defaults("source_set") {
+  configs = shared_configs
+}
+
+set_default_toolchain("//build/toolchain/gcc")

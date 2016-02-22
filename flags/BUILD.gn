@@ -1,0 +1,40 @@
+config("standards") {
+  cflags_c = [ "-std=c11" ]
+  cflags_cc = [ "-std=c++14" ]
+}
+
+config("warnings") {
+  cflags = [
+    "-Wall",
+    "-Werror",
+    "-Wextra",
+  ]
+}
+
+config("debug") {
+  defines = [ "DEBUG" ]
+}
+
+config("no_debug") {
+  defines = [ "NDEBUG" ]
+}
+
+config("optimize") {
+  cflags = [ "-O2" ]
+}
+
+config("no_optimize") {
+  cflags = [ "-O0" ]
+}
+
+config("symbols") {
+  cflags = [ "-g2" ]
+}
+
+config("no_symbols") {
+  cflags = [ "-g0" ]
+}
+
+config("whole_program_optimization") {
+  # TODO - LTO
+}
