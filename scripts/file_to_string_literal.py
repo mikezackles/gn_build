@@ -8,5 +8,5 @@ with open(sys.argv[1], 'w') as outfile:
         outfile.write('char const* {0} =\n'.format(sys.argv[4]))
         outfile.write('R"SHADER(\n')
         outfile.write(infile.read())
-        outfile.write('\n)SHADER"\n')
+        outfile.write('\n)SHADER";\n')
         outfile.write('}')
