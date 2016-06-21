@@ -1,3 +1,6 @@
+import("//build/templates/compdb.gni")
+import("//build/templates/test_runner.gni")
+
 declare_args() {
   is_debug = true
   compiler = "clang"
@@ -24,6 +27,7 @@ if (is_debug) {
     "//build/flags:no_optimize",
     "//build/flags:symbols",
     "//build/flags:debug",
+    "//build/sanitizers:clang",
   ]
 } else {
   shared_configs += [

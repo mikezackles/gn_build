@@ -1,0 +1,9 @@
+template("test_runner") {
+  action(target_name) {
+    forward_variables_from(invoker, ["deps"])
+    script = "//build/scripts/run_command.py"
+    outputs = [ "$root_out_dir/always_run_test_runner" ]
+    absolute_test_exe = rebase_path(invoker.test_exe, "/")
+    args = [ "/$absolute_test_exe" ]
+  }
+}

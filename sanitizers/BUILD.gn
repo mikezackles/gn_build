@@ -1,0 +1,13 @@
+config("clang") {
+  if (is_clang || is_debug) {
+    # TODO - more sanitizers! (see chromium toolchain)
+    cflags = [
+      "-fsanitize=address",
+      "-fno-omit-frame-pointer",
+      "-fno-optimize-sibling-calls",
+    ]
+    ldflags = [
+      "-fsanitize=address",
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+# Use ninja to create a clang compilation database suitable for use with rtags
+template("compdb") {
+  action(target_name) {
+    forward_variables_from(invoker, [])
+    script = "//build/scripts/compdb.py"
+    outputs = [
+      "$root_out_dir/compile_commands.json",
+      "$root_out_dir/always_run_compdb",
+    ]
+    args = [
+      rebase_path(root_out_dir, root_build_dir),
+      rebase_path("$root_out_dir/compile_commands.json", root_build_dir),
+    ]
+  }
+}
